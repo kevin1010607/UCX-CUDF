@@ -1,12 +1,26 @@
+#!/bin/bash
+
+# !!!!! All files must in the same directory on Gadi !!!!!
+
+# Record the path of our files
+export BUILD_PATH=$PWD
+
 # Create directory
 export PROJECT_NAME=public
 export SCRATCH=/scratch/${PROJECT_NAME}/NTHU-WY
 mkdir -p $SCRATCH
 
-# Download github repo
+# Download github repo and replace some files with our files
 cd $SCRATCH
 git clone https://github.com/hpcac/2022-APAC-HPC-AI.git
 cd 2022-APAC-HPC-AI/Communications_Performance_with_UCX
+rm -f build-env.sh cluster.cfg cudf-merge.py launch.sh run-cluster.sh
+cp ${BUILD_PATH}/build-env.sh ./build-env.sh
+cp ${BUILD_PATH}/cluster.cfg ./cluster.cfg
+cp ${BUILD_PATH}/cudf-merge.py ./cudf-merge.py
+cp ${BUILD_PATH}/launch.sh ./launch.sh
+cp ${BUILD_PATH}/run-cluster.sh ./run-cluster.sh
+cp ${BUILD_PATH}/ucx-env.cfg ./ucx-env.cfg
 
 # Install miniconda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ${SCRATCH}/miniconda.sh
@@ -39,8 +53,8 @@ git checkout v1.12.1
 ./autogen.sh
 mkdir build && cd build
 ../contrib/configure-release \
-        --prefix=$CONDA_PREFIX \
-        --with-cuda=$CUDA_HOME \
-        --enable-mt
+    --prefix=$CONDA_PREFIX \
+    --with-cuda=$CUDA_HOME \
+    --enable-mt
 make -j8
 make install
