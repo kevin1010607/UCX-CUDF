@@ -1,3 +1,4 @@
+#!/bin/bash
 #PBS -P fm48
 #PBS -N CUDF
 #PBS -q gpuvolta
@@ -11,6 +12,7 @@
 
 CFG_FILE=${PBS_O_WORKDIR}/cluster.cfg
 UCX_FILE=${PBS_O_WORKDIR}/ucx-env.cfg
+
 if [ ! -f $CFG_FILE ]; then
     echo "Config file ${CFG_FILE} not found. Make sure you're submitting the "
     echo "job from the directory containing launch.sh and cluster.cfg files."
