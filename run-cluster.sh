@@ -84,7 +84,7 @@ else
 
     echo "$ python cudf-merge.py \
         --devs "0,1,2,3" \
-        --rmm-init-pool-size 16000000000 \
+        --rmm-init-pool-size 25000000000 \
         --server-file ${SERVER_FILE} \
         --n-devs-on-net ${PBS_NGPUS} \
         --node-num ${NODE_NUM} \
@@ -93,7 +93,7 @@ else
         ${RESULTS_ARGS}" &>> ${OUT_FILE} &
     python cudf-merge.py \
         --devs "0,1,2,3" \
-        --rmm-init-pool-size 16000000000 \
+        --rmm-init-pool-size 25000000000 \
         --server-file ${SERVER_FILE} \
         --n-devs-on-net ${PBS_NGPUS} \
         --node-num ${NODE_NUM} \
